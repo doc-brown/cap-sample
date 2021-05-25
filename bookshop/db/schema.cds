@@ -29,3 +29,18 @@ entity Genres : sap.common.CodeList {
   parent   : Association to Genres;
   children : Composition of many Genres on children.parent = $self;
 }
+
+entity ChargingStations {
+key ID : Integer;
+issuer : Boolean;
+chargePointModel :String;
+voltage: Integer;
+connectors:  Association to many Connectors on connectors.chargingStation = $self;
+}
+
+entity Connectors {
+  key connectorId: Integer;
+  chargingStation: Association to ChargingStations;
+  currentTransactionDate: DateTime;
+  info: LargeString;
+}
